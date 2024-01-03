@@ -2,7 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using TodoApi;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<TodoDb>(opt => opt.UseInMemoryDatabase("TodoList"));
+//builder.Services.AddDbContext<TodoDb>(opt => opt.UseInMemoryDatabase("TodoList"));
+builder.Services.AddDbContext<TodoDb>(opt =>
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddCors(option =>
 {
