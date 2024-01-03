@@ -3,27 +3,47 @@
         <script src="main.js"></script>
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
+    
     <body>
+
+        <!-- Original Tailwind Template from: https://tailwindcomponents.com/component/todo-list-app -->
+        <!-- <div class="h-100 w-full flex items-center justify-center bg-teal-lightest font-sans">
+            <div class="bg-white rounded shadow p-6 m-4 w-full lg:w-3/4 lg:max-w-lg">
+                <div class="mb-4">
+                    <h1 class="text-grey-darkest">Todo List</h1>
+                    <div class="flex mt-4">
+                        <input id="txtTodoName" class="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker" placeholder="Add Todo">
+                        <button id="btnAddTodo" class="flex-no-shrink p-2 border-2 rounded text-teal border-teal hover:text-white hover:bg-teal">Add</button>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex mb-4 items-center">
+                        <p class="w-full text-grey-darkest">Add another component to Tailwind Components</p>
+                        <button id="btnCheckTodo" class="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-green border-green hover:bg-green">Done</button>
+                        <button id="btnDeleteTodo" class="flex-no-shrink p-2 ml-2 border-2 rounded text-red border-red hover:text-white hover:bg-red">Remove</button>
+                    </div>
+                    <div class="flex mb-4 items-center">
+                        <p class="w-full line-through text-green">Submit Todo App Component to Tailwind Components</p>
+                        <button class="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-grey border-grey hover:bg-grey">Not Done</button>
+                        <button class="flex-no-shrink p-2 ml-2 border-2 rounded text-red border-red hover:text-white hover:bg-red">Remove</button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
         
-        <h1>Todo List:</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>
-                        Id
-                    </th>
-                    <th>
-                        Name
-                    </th>
-                    <th>
-                        IsComplete
-                    </th>
-                </tr>
-            </thead>
-            
-            <tbody id="todoBody">
-            </tbody>
-        </table>
+        <div class="h-100 w-full flex items-center justify-center bg-teal-lightest font-sans">
+            <div class="bg-white rounded shadow p-6 m-4 w-full lg:w-3/4 lg:max-w-lg">
+                <div class="mb-4">
+                    <h1 class="text-grey-darkest">Todo List</h1>
+                    <div class="flex mt-4">
+                        <input id="txtTodoName" class="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker" placeholder="Add Todo">
+                        <button id="btnAddTodo" class="flex-no-shrink p-2 border-2 rounded text-teal border-teal hover:text-white hover:bg-teal">Add</button>
+                    </div>
+                </div>
+                <div id="todoBody">
+                </div>
+            </div>
+        </div>
 
         <script>
             window.onload = async function() {

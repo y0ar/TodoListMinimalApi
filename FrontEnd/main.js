@@ -14,26 +14,31 @@ async function fillTable() {
     if (todos && todos.length > 0) {
         let todoHtml = "";
         todos.forEach(todoItem => {
-            // console.log("Id: " + todoItem.id + ", Name: " + todoItem.name + ", IsComplete: " + todoItem.isComplete);
-            todoHtml += `
-                <tr>
-                    <td>
-                        <label>${todoItem.id}</label>
-                    </td>
-                    <td>
-                        <label>${todoItem.name}</label>
-                    </td>
-                    <td>
-                        <input type="checkbox" disabled="true" checked="${todoItem.name}"/>
-                    </td>
-                </tr>
-            `
+            todoHtml += getTodoHtml(todoItem.id, todoItem.name, todoItem.isComplete);
         });
-        
+
         let todoBody = document.getElementById("todoBody");
         todoBody.innerHTML = todoHtml;
     }
     else {
         console.log('No data.');
     }
+}
+
+function getTodoHtml(id, name, isComplete) {
+    let todoHtml = `
+        <div class="flex mb-4 items-center">
+            <input type="text" disabled="true" hidden="true" value="${id}"/>
+            <p class="w-full text-grey-darkest">${name}</p>`
+    
+    if (isComplete === true) {
+        todoHtml += `<button id="btnCheckTodo" class="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-green border-green hover:bg-green">Done</button>`
+    }
+    else {
+        todoHtml += `<button id="btnCheckTodo" class="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-grey border-grey hover:bg-grey">Not Done</button>`
+    }
+    todoHtml += `<button id="btnDeleteTodo" class="flex-no-shrink p-2 ml-2 border-2 rounded text-red border-red hover:text-white hover:bg-red">Remove</button>
+        </div>
+        `
+    return todoHtml;
 }
