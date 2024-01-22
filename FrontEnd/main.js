@@ -36,6 +36,29 @@ async function deleteTodoItem(id) {
     await fillTable();
 }
 
+async function updateTodoItem(id) {
+    let isComplete = document.getElementById(`pName${id}`).classList.contains("line-through");
+    
+    await fetch(`${uri}/${id}`, {
+        method: "PUT",
+        body: JSON.stringify({
+          //name: document.getElementById(`pName${id}`).innerText,
+          isComplete: !isComplete
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        }
+    })
+    .then(response => {
+        if (response.status !== 204) {
+            return response.json();
+        }
+    })
+    .catch(error => console.error('Error:', error));
+
+    await fillTable();
+}
+
 async function fillTable() {
     let todos = await getTodos();
     if (todos && todos.length > 0) {
@@ -54,14 +77,15 @@ async function fillTable() {
 
 function getTodoHtml(id, name, isComplete) {
     let todoHtml = `
-        <div id="${id}" class="flex mb-4 items-center">
-            <p id="pName${id}" class="w-full text-grey-darkest">${name}</p>`
+        <div id="${id}" class="flex mb-4 items-center">`
     
     if (isComplete === true) {
-        todoHtml += `<button id="btnCheckTodo${id}" class="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white-300 text-green border-green hover:bg-green-300">Done</button>`
+        todoHtml += `<p id="pName${id}" class="w-full text-grey-darkest line-through">${name}</p>
+        <button id="btnCheckTodo${id}" class="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white-300 text-grey border-grey hover:bg-blue-300" onclick="updateTodoItem(${id})">Not Done</button>`
     }
     else {
-        todoHtml += `<button id="btnCheckTodo${id}" class="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white-300 text-grey border-grey hover:bg-blue-300">Not Done</button>`
+        todoHtml += `<p id="pName${id}" class="w-full text-grey-darkest">${name}</p>
+        <button id="btnCheckTodo${id}" class="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white-300 text-green border-green hover:bg-green-300" onclick="updateTodoItem(${id})">Done</button>`
     }
     todoHtml += `<button id="btnDeleteTodo${id}" class="flex-no-shrink p-2 ml-2 border-2 rounded text-red border-red hover:text-white-300 hover:bg-red-300" onclick="deleteTodoItem(${id})">Remove</button>
         </div>
