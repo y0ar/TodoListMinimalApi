@@ -26,6 +26,16 @@ async function addTodoItem() {
     await fillTable();
 }
 
+async function deleteTodoItem(id) {
+    await fetch(`${uri}/${id}`, {
+        method: "DELETE"
+    })
+    .then(response => response.json())
+    .catch(error => console.error('Error:', error));
+
+    await fillTable();
+}
+
 async function fillTable() {
     let todos = await getTodos();
     if (todos && todos.length > 0) {
@@ -53,7 +63,7 @@ function getTodoHtml(id, name, isComplete) {
     else {
         todoHtml += `<button id="btnCheckTodo${id}" class="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white-300 text-grey border-grey hover:bg-blue-300">Not Done</button>`
     }
-    todoHtml += `<button id="btnDeleteTodo${id}" class="flex-no-shrink p-2 ml-2 border-2 rounded text-red border-red hover:text-white-300 hover:bg-red-300">Remove</button>
+    todoHtml += `<button id="btnDeleteTodo${id}" class="flex-no-shrink p-2 ml-2 border-2 rounded text-red border-red hover:text-white-300 hover:bg-red-300" onclick="deleteTodoItem(${id})">Remove</button>
         </div>
         `
     return todoHtml;
