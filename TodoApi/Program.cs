@@ -75,7 +75,7 @@ static async Task<IResult> UpdateTodo(int id, TodoItemDTO todoItemDTO, TodoDb db
 
     if (todo is null) return TypedResults.NotFound();
 
-    todo.Name = todoItemDTO.Name;
+    todo.Name = todoItemDTO.Name is not null ? todoItemDTO.Name : todo.Name;
     todo.IsComplete = todoItemDTO.IsComplete;
 
     await db.SaveChangesAsync();
